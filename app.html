@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PostPilot AI Dashboard — Autonomous AI Social Media Manager workspace for generating, scheduling, and analyzing social content.">
+  <title>Dashboard — PostPilot AI</title>
+
+  <!-- Google Fonts: Poppins (headings) & Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Dashboard Stylesheet -->
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Sidebar Overlay Backdrop for Mobile / Tablet (< 1024px) -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+  <div class="app-layout">
+    <!-- Left Sidebar (5 items + logo) -->
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Dashboard Sidebar Navigation">
+      <!-- Sidebar Brand Header -->
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-logo" title="Back to Landing Page" aria-label="PostPilot AI Dashboard Home">
+          <span class="logo-icon-wrapper">
+            <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M4 16L28 4L18 28L14 18L4 16Z" fill="url(#dash-logo-grad)" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M14 18L28 4" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="20" cy="10" r="1.5" fill="#FFFFFF"/>
+              <defs>
+                <linearGradient id="dash-logo-grad" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FF4D8D"/>
+                  <stop offset="1" stop-color="#38BDF8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <span class="logo-text">PostPilot<span class="logo-accent">.ai</span></span>
+        </a>
+
+        <!-- Close Sidebar Button (< 1024px) -->
+        <button class="sidebar-close-btn" id="sidebar-close-btn" type="button" aria-label="Close navigation drawer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Workspace & Accounts Trigger -->
+      <div class="sidebar-workspace" id="sidebar-workspace-btn" style="cursor: pointer;" title="Manage Connected Accounts & AI Engine" role="button" tabindex="0" aria-label="Manage Connected Accounts and AI Engine">
+        <div class="workspace-avatar">WS</div>
+        <div class="workspace-details">
+          <span class="workspace-name">Growth Studio</span>
+          <span class="workspace-plan" id="sidebar-accounts-plan">0 of 5 Accounts Linked</span>
+        </div>
+      </div>
+
+      <!-- Navigation List (5 items: Generator, Calendar, Scheduler, Analytics, Saved) -->
+      <nav class="sidebar-nav" aria-label="Workspace views">
+        <ul class="nav-list">
+          <!-- 1. Generator -->
+          <li class="nav-item">
+            <button class="nav-btn active" data-view="generator" type="button" id="nav-btn-generator" aria-current="page">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <span class="nav-label">Generator</span>
+              <span class="nav-tag">AI</span>
+            </button>
+          </li>
+
+          <!-- 2. Calendar -->
+          <li class="nav-item">
+            <button class="nav-btn" data-view="calendar" type="button" id="nav-btn-calendar">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span class="nav-label">Calendar</span>
+            </button>
+          </li>
+
+          <!-- 3. Scheduler -->
+          <li class="nav-item">
+            <button class="nav-btn" data-view="scheduler" type="button" id="nav-btn-scheduler">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span class="nav-label">Scheduler</span>
+              <span class="nav-badge-count">12</span>
+            </button>
+          </li>
+
+          <!-- 4. Analytics -->
+          <li class="nav-item">
+            <button class="nav-btn" data-view="analytics" type="button" id="nav-btn-analytics">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+              <span class="nav-label">Analytics</span>
+            </button>
+          </li>
+
+          <!-- 5. Saved -->
+          <li class="nav-item">
+            <button class="nav-btn" data-view="saved" type="button" id="nav-btn-saved">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span class="nav-label">Saved</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <!-- Monthly Credits Card -->
+        <div class="credits-card">
+          <div class="credits-header">
+            <span class="credits-title">AI Engine Quota</span>
+            <span class="credits-val">842 / 1,000</span>
+          </div>
+          <div class="credits-track">
+            <div class="credits-fill" style="width: 84%;"></div>
+          </div>
+        </div>
+
+        <!-- Sidebar API Key / Settings Button -->
+        <button class="sidebar-api-link-btn" id="sidebar-api-key-btn" type="button" title="Manage Gemini API Key & Model">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width: 13px; height: 13px; color: var(--primary);" aria-hidden="true">
+            <polygon points="8 1 10.2 5.5 15 6.2 11.5 9.6 12.3 14.5 8 12.2 3.7 14.5 4.5 9.6 1 6.2 5.8 5.5"></polygon>
+          </svg>
+          <span>Gemini AI Key: Active</span>
+        </button>
+
+        <!-- Sidebar Demo Mode Note -->
+        <div class="sidebar-demo-note">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="8" cy="8" r="7"></circle>
+            <line x1="8" y1="8" x2="8" y2="12"></line>
+            <circle cx="8" cy="5" r="0.75" fill="currentColor"></circle>
+          </svg>
+          <span>Demo mode: accounts are simulated and not connected to real social media APIs.</span>
+        </div>
+
+        <!-- Exit / Back to Home -->
+        <a href="index.html" class="sidebar-back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Landing Page</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Wrapper (Top Bar + Dynamic View Content) -->
+    <div class="app-main-wrapper">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <!-- Hamburger Drawer Toggle (< 1024px) -->
+          <button class="hamburger-btn" id="hamburger-btn" type="button" aria-expanded="false" aria-controls="app-sidebar" aria-label="Toggle navigation drawer">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+
+          <!-- Current Breadcrumb / View Title -->
+          <div class="breadcrumb-group">
+            <span class="breadcrumb-root">Dashboard</span>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current" id="topbar-view-title">Generator</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- "Demo Mode" / "Live Mode" Interactive Badge (Click to open Accounts & API Manager) -->
+          <button class="badge-demo-btn badge-live" id="demo-mode-badge" type="button" aria-haspopup="dialog" aria-label="Toggle Account and API Settings" title="Click to manage real Gemini API key & accounts">
+            <span class="live-pulse-dot" id="demo-status-dot"></span>
+            <span class="demo-text" id="demo-status-text">Live Mode (AI Active)</span>
+          </button>
+
+          <!-- Direct API Key Quick Trigger -->
+          <button class="btn btn-outline btn-sm topbar-api-btn is-active" id="btn-topbar-api-key" type="button" aria-haspopup="dialog" aria-label="Configure Gemini API Key" title="Connect or configure Gemini API Key">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width: 13px; height: 13px;" aria-hidden="true">
+              <polygon points="8 1 10.2 5.5 15 6.2 11.5 9.6 12.3 14.5 8 12.2 3.7 14.5 4.5 9.6 1 6.2 5.8 5.5"></polygon>
+            </svg>
+            <span id="topbar-api-btn-text">AI Key: Active</span>
+            <span class="badge-api-connected-dot" id="topbar-api-dot"></span>
+          </button>
+
+          <!-- "Connect Accounts" Quick Trigger -->
+          <button class="btn btn-outline btn-sm topbar-accounts-btn" id="btn-topbar-accounts" type="button" aria-haspopup="dialog" aria-label="Manage connected social accounts and API keys" title="Manage connected social accounts and API keys">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width: 13px; height: 13px;" aria-hidden="true">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <span>Accounts</span>
+            <span class="accounts-badge-count" id="topbar-accounts-count">1/5</span>
+          </button>
+
+          <!-- Light / Dark Theme Toggle (Synced with index.html) -->
+          <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Switch between dark and light theme" title="Toggle theme">
+            <!-- Sun Icon (shown in dark mode) -->
+            <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <!-- Moon Icon (shown in light mode) -->
+            <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <!-- Quick Action CTA -->
+          <button class="btn btn-primary topbar-cta" id="btn-quick-create" type="button">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="8" y1="3" x2="8" y2="13"></line>
+              <line x1="3" y1="8" x2="13" y2="8"></line>
+            </svg>
+            <span>New Post</span>
+          </button>
+
+          <!-- User Avatar -->
+          <div class="user-profile-btn" id="topbar-user-profile" title="Logged in as Growth Lead • Click for Account Settings" role="button" tabindex="0" aria-label="Open Account Settings">
+            <span class="user-initials">GL</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content Area: 5 Views (Switched via app.js without reload) -->
+      <main class="app-main-content" id="main-content">
+
+        <!-- ================================================================
+             VIEW 1: GENERATOR (Active by default)
+             ================================================================ -->
+        <section class="view-panel active" id="view-generator" aria-labelledby="heading-generator">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1 class="view-heading" id="heading-generator">AI Post Generator</h1>
+              <p class="view-subheading">Compose, optimize, and preview high-engagement captions across all connected platforms.</p>
+            </div>
+            <div class="view-actions">
+              <button class="btn btn-secondary btn-sm" id="btn-clear-generator" type="button">Reset Form</button>
+            </div>
+          </div>
+
+          <!-- Generator Card -->
+          <div class="dashboard-card">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <h2 class="card-title">Campaign Composer</h2>
+                <span class="card-subtitle">Generate high-converting captions, viral tags, CTAs, and image ideas</span>
+              </div>
+              <button type="button" class="card-badge-btn badge-live" id="btn-gen-model-badge" title="Click to manage Gemini API Key & Model">
+                <span class="live-pulse-dot" id="gen-badge-dot"></span>
+                <span id="gen-badge-model-text">Gemini 2.0 Flash (Live)</span>
+              </button>
+            </div>
+
+            <!-- Live API Status Banner -->
+            <div class="api-key-active-banner banner-live" id="gen-api-banner">
+              <div class="api-banner-left">
+                <span class="live-pulse-dot" id="gen-banner-dot"></span>
+                <span id="gen-banner-text">Live AI Mode Active • Google Gemini 2.0 Flash (Key Connected)</span>
+              </div>
+              <button type="button" class="btn-text-link" id="btn-gen-manage-key">Configure Key</button>
+            </div>
+
+            <div class="generator-layout">
+              <!-- Left Column: Form -->
+              <div class="generator-form-col">
+                <form id="content-generator-form" novalidate onsubmit="return false;">
+                  <!-- 1. Topic (Required) -->
+                  <div class="form-group">
+                    <label class="form-label" for="gen-topic">
+                      <span>Topic <span class="required-star" aria-hidden="true">*</span></span>
+                      <span class="char-counter" id="topic-char-counter">0 chars</span>
+                    </label>
+                    <textarea class="form-textarea" id="gen-topic" placeholder="E.g. Launching our new autonomous AI agent for social media teams. Focus on 10x time savings, creator burnout relief, and a 14-day free trial." required aria-required="true" aria-describedby="error-gen-topic"></textarea>
+                    <span class="field-error" id="error-gen-topic" role="alert" style="display: none;">Please provide a topic to generate content.</span>
+                  </div>
+
+                  <!-- 2. Platform Selection -->
+                  <div class="form-group">
+                    <label class="form-label" for="gen-platform">Platform</label>
+                    <div class="platform-chips-row" id="platform-chips-selector" role="radiogroup" aria-label="Select target social platform">
+                      <button type="button" class="channel-chip active" data-platform="Instagram" role="radio" aria-checked="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                        <span>Instagram</span>
+                      </button>
+                      <button type="button" class="channel-chip" data-platform="LinkedIn" role="radio" aria-checked="false">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.4 9.74V9.93H5.06v8.57h2.8z"/></svg>
+                        <span>LinkedIn</span>
+                      </button>
+                      <button type="button" class="channel-chip" data-platform="X" role="radio" aria-checked="false">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <span>X (Twitter)</span>
+                      </button>
+                      <button type="button" class="channel-chip" data-platform="Facebook" role="radio" aria-checked="false">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                        <span>Facebook</span>
+                      </button>
+                      <button type="button" class="channel-chip" data-platform="YouTube" role="radio" aria-checked="false">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <span>YouTube</span>
+                      </button>
+                    </div>
+                    <select id="gen-platform" class="form-select" style="display: none;" aria-label="Selected Platform">
+                      <option value="Instagram" selected>Instagram</option>
+                      <option value="LinkedIn">LinkedIn</option>
+                      <option value="X">X (Twitter)</option>
+                      <option value="Facebook">Facebook</option>
+                      <option value="YouTube">YouTube</option>
+                    </select>
+
+                    <!-- Platform Account Connection Live Indicator -->
+                    <div class="platform-account-status" id="gen-platform-status" aria-live="polite">
+                      <span class="status-indicator-dot dot-disconnected" id="gen-status-dot"></span>
+                      <span class="status-indicator-text" id="gen-status-text">Instagram not connected</span>
+                      <button type="button" class="btn-link-action" id="btn-gen-connect-platform">Connect Account</button>
+                    </div>
+                  </div>
+
+                  <!-- 3. Tone & 4. Language in Row -->
+                  <div class="form-row">
+                    <!-- Tone (Professional, Funny, Inspirational, Casual) -->
+                    <div class="form-group flex-1">
+                      <label class="form-label" for="gen-tone">Tone</label>
+                      <select class="form-select" id="gen-tone">
+                        <option value="Professional" selected>Professional</option>
+                        <option value="Funny">Funny</option>
+                        <option value="Inspirational">Inspirational</option>
+                        <option value="Casual">Casual</option>
+                      </select>
+                    </div>
+
+                    <!-- Language (English, Hindi, Hinglish) -->
+                    <div class="form-group flex-1">
+                      <label class="form-label" for="gen-language">Language</label>
+                      <select class="form-select" id="gen-language">
+                        <option value="English" selected>English</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Hinglish">Hinglish</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- 5. Target Audience -->
+                  <div class="form-group">
+                    <label class="form-label" for="gen-audience">Target Audience</label>
+                    <input type="text" class="form-input" id="gen-audience" placeholder="e.g. Early-stage founders, B2B marketers, Creators" />
+                  </div>
+
+                  <!-- Form Action Buttons -->
+                  <div class="form-actions">
+                    <button class="btn btn-primary" id="btn-generate-content" type="button" style="flex: 1;">
+                      <svg class="btn-gen-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <polygon points="8 1 10.2 5.5 15 6.2 11.5 9.6 12.3 14.5 8 12.2 3.7 14.5 4.5 9.6 1 6.2 5.8 5.5 8 1"></polygon>
+                      </svg>
+                      <span id="btn-generate-text">Generate Content</span>
+                    </button>
+                    <button class="btn btn-outline" id="btn-regenerate-content" type="button" style="display: none;" title="Regenerate with current settings">
+                      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;" aria-hidden="true">
+                        <path d="M2 8a6 6 0 1 0 1.8-4.2L2 5.5M2 2v3.5h3.5"></path>
+                      </svg>
+                      <span>Regenerate</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Right Column: Results & Previews -->
+              <div class="generator-preview-col" id="generator-results-col">
+                <!-- 1. Initial Empty Placeholder State -->
+                <div class="placeholder-state" id="generator-placeholder">
+                  <div class="placeholder-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                  </div>
+                  <h3 class="placeholder-title">Ready to Generate Social Content</h3>
+                  <p class="placeholder-desc">Fill in your campaign topic on the left and click "Generate Content" to draft platform-native captions, viral tags, and AI image prompts.</p>
+                </div>
+
+                <!-- 2. Loading Skeleton Area (Shown while generating) -->
+                <div class="skeleton-box" id="generator-skeleton" style="display: none;" aria-live="polite" aria-label="Generating content">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="skeleton skeleton-line short"></div>
+                    <div class="skeleton" style="width: 70px; height: 24px; border-radius: 12px;"></div>
+                  </div>
+                  <div class="skeleton-card">
+                    <div class="skeleton skeleton-line short"></div>
+                    <div class="skeleton skeleton-line"></div>
+                    <div class="skeleton skeleton-line medium"></div>
+                  </div>
+                  <div class="skeleton-card">
+                    <div class="skeleton skeleton-line short"></div>
+                    <div class="skeleton skeleton-line"></div>
+                    <div class="skeleton skeleton-line medium"></div>
+                  </div>
+                  <div class="skeleton-chips-row">
+                    <div class="skeleton skeleton-chip"></div>
+                    <div class="skeleton skeleton-chip"></div>
+                    <div class="skeleton skeleton-chip"></div>
+                    <div class="skeleton skeleton-chip"></div>
+                    <div class="skeleton skeleton-chip"></div>
+                  </div>
+                </div>
+
+                <!-- 3. Dynamic Results Container (Rendered cards) -->
+                <div class="results-wrapper" id="generator-results" style="display: none;">
+                  <!-- Results Meta Status -->
+                  <div class="results-meta-banner">
+                    <div class="results-meta-tags">
+                      <span class="meta-chip primary" id="res-platform-tag">Instagram</span>
+                      <span class="meta-chip" id="res-tone-tag">Professional</span>
+                      <span class="meta-chip" id="res-lang-tag">English</span>
+                    </div>
+                    <button class="btn btn-outline btn-sm" id="btn-top-regenerate" type="button">
+                      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width: 13px; height: 13px;" aria-hidden="true">
+                        <path d="M2 8a6 6 0 1 0 1.8-4.2L2 5.5M2 2v3.5h3.5"></path>
+                      </svg>
+                      <span>Regenerate</span>
+                    </button>
+                  </div>
+
+                  <!-- 3 Captions Stack -->
+                  <div>
+                    <div class="section-subhead-bar">
+                      <h3 class="section-subhead-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                          <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                        <span>Generated Captions (3 Angles)</span>
+                      </h3>
+                      <span style="font-size: 0.75rem; color: var(--muted);">Click Copy or Save on any variant</span>
+                    </div>
+
+                    <div class="captions-stack" id="captions-container">
+                      <!-- Cards injected dynamically via app.js using textContent -->
+                    </div>
+                  </div>
+
+                  <!-- Hashtags Section -->
+                  <div class="hashtags-card">
+                    <div class="section-subhead-bar" style="margin-bottom: 8px;">
+                      <h3 class="section-subhead-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                          <line x1="4" y1="9" x2="20" y2="9"></line>
+                          <line x1="4" y1="15" x2="20" y2="15"></line>
+                          <line x1="10" y1="3" x2="8" y2="21"></line>
+                          <line x1="16" y1="3" x2="14" y2="21"></line>
+                        </svg>
+                        <span>Curated Hashtags (15)</span>
+                      </h3>
+                      <button class="btn btn-outline btn-sm" id="btn-copy-hashtags" type="button">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width: 13px; height: 13px;" aria-hidden="true">
+                          <rect x="5" y="5" width="8" height="8" rx="1.5"></rect>
+                          <path d="M3 11V3h8"></path>
+                        </svg>
+                        <span>Copy All</span>
+                      </button>
+                    </div>
+                    <div class="hashtags-grid" id="hashtags-container">
+                      <!-- Chips injected dynamically via app.js using textContent -->
+                    </div>
+                  </div>
+
+                  <!-- Strategy Grid: Call to Action & Best Time -->
+                  <div class="strategy-grid">
+                    <!-- CTA Card -->
+                    <div class="strategy-card">
+                      <div class="strategy-card-header">
+                        <span class="strategy-card-title">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                          </svg>
+                          <span>Call to Action (CTA)</span>
+                        </span>
+                        <button class="btn btn-outline btn-sm" id="btn-copy-cta" type="button" aria-label="Copy CTA text">
+                          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width: 12px; height: 12px;" aria-hidden="true"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V3h8"/></svg>
+                          <span>Copy</span>
+                        </button>
+                      </div>
+                      <p class="strategy-text" id="res-cta-text"></p>
+                    </div>
+
+                    <!-- Best Time Card -->
+                    <div class="strategy-card">
+                      <div class="strategy-card-header">
+                        <span class="strategy-card-title">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                          </svg>
+                          <span>Best Posting Time</span>
+                        </span>
+                      </div>
+                      <p class="strategy-text" id="res-best-time-text"></p>
+                    </div>
+
+                    <!-- Image Idea & Prompt Card (Full Width) -->
+                    <div class="strategy-card full-width">
+                      <div class="strategy-card-header">
+                        <span class="strategy-card-title">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                          </svg>
+                          <span>Visual Asset Idea & AI Prompt</span>
+                        </span>
+                        <button class="btn btn-outline btn-sm" id="btn-copy-image-prompt" type="button" aria-label="Copy AI image prompt">
+                          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width: 12px; height: 12px;" aria-hidden="true"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V3h8"/></svg>
+                          <span>Copy Prompt</span>
+                        </button>
+                      </div>
+                      <p class="strategy-text" id="res-image-idea-text"></p>
+                      <div class="prompt-copy-block" id="res-image-prompt-block"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 2: CALENDAR
+             ================================================================ -->
+        <section class="view-panel" id="view-calendar" aria-labelledby="heading-calendar">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1 class="view-heading" id="heading-calendar">Content Calendar & 7-Day Plan</h1>
+              <p class="view-subheading">Generate an AI-powered 7-day multi-format social campaign tailored to your business goals.</p>
+            </div>
+            <div class="view-actions" id="cal-top-actions" style="display: none;">
+              <button class="btn btn-secondary btn-sm" id="btn-export-calendar-csv" type="button">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;" aria-hidden="true">
+                  <path d="M8 2v8M4 7l4 4 4-4M2 13h12"/>
+                </svg>
+                <span>Export CSV</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Calendar Input Card -->
+          <div class="dashboard-card" style="margin-bottom: 24px;">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <h2 class="card-title">7-Day Campaign Strategy Planner</h2>
+                <span class="card-subtitle">Define your business niche and weekly objective to generate a multi-format plan</span>
+              </div>
+              <span class="card-badge">7-Day Multi-Format</span>
+            </div>
+
+            <form id="calendar-planner-form" novalidate onsubmit="return false;">
+              <div class="form-row">
+                <!-- Business Type (Required) -->
+                <div class="form-group flex-1">
+                  <label class="form-label" for="cal-business-type">
+                    <span>Business Type <span class="required-star" aria-hidden="true">*</span></span>
+                  </label>
+                  <input type="text" class="form-input" id="cal-business-type" placeholder="e.g. B2B SaaS, Fitness Coach, Digital Agency, D2C Apparel" required aria-required="true" aria-describedby="error-cal-business-type" />
+                  <span class="field-error" id="error-cal-business-type" role="alert" style="display: none;">Please enter your business type.</span>
+                </div>
+
+                <!-- Goal (Required) -->
+                <div class="form-group flex-1">
+                  <label class="form-label" for="cal-goal">
+                    <span>Campaign Goal <span class="required-star" aria-hidden="true">*</span></span>
+                  </label>
+                  <input type="text" class="form-input" id="cal-goal" placeholder="e.g. Generate 50 trial signups, Build thought leadership, Drive newsletter leads" required aria-required="true" aria-describedby="error-cal-goal" />
+                  <span class="field-error" id="error-cal-goal" role="alert" style="display: none;">Please enter your campaign goal.</span>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 12px; align-items: center; margin-top: 6px; flex-wrap: wrap;">
+                <button class="btn btn-primary" id="btn-generate-calendar" type="button">
+                  <svg class="btn-cal-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="2" y="3" width="12" height="11" rx="2"></rect>
+                    <line x1="2" y1="7" x2="14" y2="7"></line>
+                    <line x1="5" y1="1" x2="5" y2="4"></line>
+                    <line x1="11" y1="1" x2="11" y2="4"></line>
+                  </svg>
+                  <span id="btn-generate-cal-text">Generate 7-Day Plan</span>
+                </button>
+                <button class="btn btn-outline" id="btn-export-calendar-csv-inline" type="button" style="display: none;" title="Download calendar as CSV">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;" aria-hidden="true">
+                    <path d="M8 2v8M4 7l4 4 4-4M2 13h12"/>
+                  </svg>
+                  <span>Export CSV</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Calendar Results Section -->
+          <div id="calendar-results-container">
+            <!-- Empty / Initial Placeholder -->
+            <div class="placeholder-state" id="cal-placeholder">
+              <div class="placeholder-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+              <h3 class="placeholder-title">No Active Weekly Plan</h3>
+              <p class="placeholder-desc">Enter your business type and campaign goal above, then click "Generate 7-Day Plan" to create a structured day-by-day editorial calendar with Reel, Carousel, Story, and Post formats.</p>
+            </div>
+
+            <!-- Skeleton Loading State -->
+            <div class="skeleton-box" id="cal-skeleton" style="display: none;" aria-live="polite" aria-label="Generating calendar plan">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div class="skeleton skeleton-line short"></div>
+                <div class="skeleton" style="width: 110px; height: 32px; border-radius: 8px;"></div>
+              </div>
+              <div class="calendar-cards-grid">
+                <div class="skeleton-card" style="height: 220px;"></div>
+                <div class="skeleton-card" style="height: 220px;"></div>
+                <div class="skeleton-card" style="height: 220px;"></div>
+                <div class="skeleton-card" style="height: 220px;"></div>
+                <div class="skeleton-card" style="height: 220px;"></div>
+                <div class="skeleton-card" style="height: 220px;"></div>
+                <div class="skeleton-card" style="height: 220px;"></div>
+              </div>
+            </div>
+
+            <!-- 7-Day Cards Grid Area -->
+            <div id="cal-plan-wrapper" style="display: none;">
+              <div class="section-subhead-bar" style="margin-bottom: 18px;">
+                <div class="results-meta-tags">
+                  <span class="meta-chip primary" id="cal-meta-business">Business</span>
+                  <span class="meta-chip" id="cal-meta-goal">Goal</span>
+                  <span class="meta-chip">7 Days • 4 Formats</span>
+                </div>
+              </div>
+
+              <!-- Responsive Grid for 7 Day Cards -->
+              <div class="calendar-cards-grid" id="calendar-cards-grid">
+                <!-- Populated dynamically via app.js using textContent -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 3: SCHEDULER
+             ================================================================ -->
+        <section class="view-panel" id="view-scheduler" aria-labelledby="heading-scheduler">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1 class="view-heading" id="heading-scheduler">Autonomous Scheduler</h1>
+              <p class="view-subheading">Schedule saved posts via official Webhook API with live status tracking.</p>
+            </div>
+            <div class="view-actions">
+              <button class="btn btn-secondary btn-sm" id="btn-pause-queue" type="button">Pause Queue</button>
+              <button class="btn btn-secondary btn-sm" id="btn-sync-apis" type="button">Sync APIs</button>
+              <button class="btn btn-secondary btn-sm" id="btn-clear-scheduled" type="button">Clear History</button>
+            </div>
+          </div>
+
+          <!-- Schedule Composer Card -->
+          <div class="scheduler-composer-card">
+            <div class="card-header-bar" style="margin-bottom: 18px; padding-bottom: 12px;">
+              <div class="card-title-group">
+                <h2 class="card-title">Schedule New Publication</h2>
+                <span class="card-subtitle">Select a post from your library, target platform, and future publishing window</span>
+              </div>
+              <span class="card-badge" id="sched-webhook-indicator">Webhook Live</span>
+            </div>
+
+            <form id="scheduler-form" novalidate onsubmit="return false;">
+              <div class="scheduler-form-grid">
+                <!-- 1. Dropdown of saved posts from "pp_saved" -->
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" for="sched-saved-post">
+                    <span>Select Saved Post <span class="required-star" aria-hidden="true">*</span></span>
+                  </label>
+                  <select class="form-select" id="sched-saved-post" required aria-required="true">
+                    <option value="">-- Choose from your Saved Library --</option>
+                  </select>
+                </div>
+
+                <!-- 2. Platform Select -->
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" for="sched-platform">Platform</label>
+                  <select class="form-select" id="sched-platform">
+                    <option value="Instagram">Instagram</option>
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="X">X (Twitter)</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="YouTube">YouTube</option>
+                  </select>
+                  <!-- Platform Account Connection Live Indicator -->
+                  <div class="platform-account-status" id="sched-platform-status" aria-live="polite" style="margin-top: 6px;">
+                    <span class="status-indicator-dot dot-disconnected" id="sched-status-dot"></span>
+                    <span class="status-indicator-text" id="sched-status-text">Instagram not connected</span>
+                    <button type="button" class="btn-link-action" id="btn-sched-connect-platform">Connect</button>
+                  </div>
+                </div>
+
+                <!-- 3. Date Input (must not be in the past) -->
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" for="sched-date">
+                    <span>Publish Date <span class="required-star" aria-hidden="true">*</span></span>
+                  </label>
+                  <input type="date" class="form-input" id="sched-date" required aria-required="true" />
+                </div>
+
+                <!-- 4. Time Input -->
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" for="sched-time">Publish Time</label>
+                  <input type="time" class="form-input" id="sched-time" value="09:30" required />
+                </div>
+              </div>
+
+              <!-- Content Preview / Custom Text -->
+              <div class="form-group" style="margin-top: 16px; margin-bottom: 18px;">
+                <label class="form-label" for="sched-content">
+                  <span>Post Content Preview</span>
+                  <span style="font-size: 0.75rem; color: var(--muted); font-weight: normal;">Auto-populated from selected saved post</span>
+                </label>
+                <textarea class="form-textarea" id="sched-content" placeholder="Select a saved post above to populate caption text, or enter custom content to schedule..." rows="3"></textarea>
+                <span class="field-error" id="error-sched-form" role="alert" style="display: none;">Please select a saved post or enter content, and choose a valid future date.</span>
+              </div>
+
+              <!-- Submit Button -->
+              <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                <button class="btn btn-primary" id="btn-submit-schedule" type="button">
+                  <svg class="btn-sched-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="8" cy="8" r="7"></circle>
+                    <polyline points="8 4 8 8 11 10"></polyline>
+                  </svg>
+                  <span id="btn-sched-text">Schedule Post</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Scheduled Posts List Card -->
+          <div class="dashboard-card">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <h2 class="card-title">Scheduled Queue & Dispatch Log</h2>
+                <span class="card-subtitle">Real-time status for posts queued for autonomous dispatch</span>
+              </div>
+              <span class="card-badge" id="sched-queue-count">0 Queued</span>
+            </div>
+
+            <div class="scheduled-posts-container" id="scheduled-posts-container">
+              <!-- Populated dynamically via app.js using textContent -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 4: ANALYTICS
+             ================================================================ -->
+        <section class="view-panel" id="view-analytics" aria-labelledby="heading-analytics">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1 class="view-heading" id="heading-analytics">Performance & Growth Analytics</h1>
+              <p class="view-subheading">Track cross-platform audience metrics, click-through rates, and algorithmic lift.</p>
+            </div>
+            <div class="view-actions">
+              <button class="btn btn-secondary btn-sm" id="btn-export-csv" type="button">Export CSV</button>
+            </div>
+          </div>
+
+          <!-- Quick Metrics Bar -->
+          <div class="metrics-cards-row">
+            <div class="metric-mini-card">
+              <span class="metric-label">Total Impressions</span>
+              <span class="metric-value">1,248,900</span>
+              <span class="metric-trend positive">+32.4% vs last mo</span>
+            </div>
+            <div class="metric-mini-card">
+              <span class="metric-label">Avg. Engagement Rate</span>
+              <span class="metric-value">5.82%</span>
+              <span class="metric-trend positive">+1.4% lift</span>
+            </div>
+            <div class="metric-mini-card">
+              <span class="metric-label">Total Clicks & Leads</span>
+              <span class="metric-value">14,290</span>
+              <span class="metric-trend positive">+19.8% vs last mo</span>
+            </div>
+            <div class="metric-mini-card">
+              <span class="metric-label">Time Saved</span>
+              <span class="metric-value">68.5 hrs</span>
+              <span class="metric-trend neutral">Autonomous</span>
+            </div>
+          </div>
+
+          <!-- Analytics Placeholder Card -->
+          <div class="dashboard-card" style="margin-top: 24px;">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <h2 class="card-title">Audience Reach Heatmap</h2>
+                <span class="card-subtitle">Real-time follower activity distribution by hour & network</span>
+              </div>
+              <span class="card-badge">Live Telemetry</span>
+            </div>
+
+            <!-- Simulated Visual Chart Bar -->
+            <div class="analytics-chart-placeholder">
+              <div class="chart-bar-group">
+                <div class="chart-bar" style="height: 40%;" title="Monday: 42k"></div>
+                <span class="chart-label">Mon</span>
+              </div>
+              <div class="chart-bar-group">
+                <div class="chart-bar" style="height: 75%;" title="Tuesday: 86k"></div>
+                <span class="chart-label">Tue</span>
+              </div>
+              <div class="chart-bar-group">
+                <div class="chart-bar" style="height: 60%;" title="Wednesday: 68k"></div>
+                <span class="chart-label">Wed</span>
+              </div>
+              <div class="chart-bar-group">
+                <div class="chart-bar" style="height: 92%;" title="Thursday: 112k"></div>
+                <span class="chart-label">Thu</span>
+              </div>
+              <div class="chart-bar-group">
+                <div class="chart-bar" style="height: 85%;" title="Friday: 98k"></div>
+                <span class="chart-label">Fri</span>
+              </div>
+              <div class="chart-bar-group">
+                <div class="chart-bar" style="height: 48%;" title="Saturday: 51k"></div>
+                <span class="chart-label">Sat</span>
+              </div>
+              <div class="chart-bar-group">
+                <div class="chart-bar" style="height: 68%;" title="Sunday: 74k"></div>
+                <span class="chart-label">Sun</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 5: SAVED
+             ================================================================ -->
+        <section class="view-panel" id="view-saved" aria-labelledby="heading-saved">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1 class="view-heading" id="heading-saved">Saved Library & Templates</h1>
+              <p class="view-subheading">Access saved evergreen drafts, top-performing hooks, and curated hashtag vaults.</p>
+            </div>
+            <div class="view-actions">
+              <button class="btn btn-primary btn-sm" id="btn-new-template" type="button">Create in Generator</button>
+            </div>
+          </div>
+
+          <!-- Saved Library Toolbar: Search Box & Platform Filter -->
+          <div class="saved-toolbar">
+            <div class="saved-search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="saved-search-input" class="saved-search-input" placeholder="Search saved posts by topic, caption text, or hashtags..." aria-label="Search saved posts" />
+            </div>
+
+            <div class="saved-filter-group">
+              <label for="saved-platform-filter" class="saved-filter-label">Filter:</label>
+              <select id="saved-platform-filter" class="form-select" style="min-width: 160px;" aria-label="Filter by platform">
+                <option value="All" selected>All Platforms</option>
+                <option value="Instagram">Instagram</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="X">X (Twitter)</option>
+                <option value="Facebook">Facebook</option>
+                <option value="YouTube">YouTube</option>
+                <option value="Reel">Reels</option>
+                <option value="Carousel">Carousels</option>
+                <option value="Story">Stories</option>
+                <option value="Post">Posts</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Saved Posts Dynamic Cards Grid -->
+          <div class="saved-items-grid" id="saved-items-grid">
+            <!-- Populated dynamically via app.js using textContent -->
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal Dialog -->
+  <div class="modal-backdrop" id="delete-confirm-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="modal-confirm-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-icon-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M10 2L1 18h18L10 2z"></path>
+            <line x1="10" y1="8" x2="10" y2="12"></line>
+            <line x1="10" y1="15" x2="10.01" y2="15"></line>
+          </svg>
+        </div>
+        <h3 class="modal-title" id="modal-confirm-title">Delete Saved Post?</h3>
+      </div>
+      <p class="modal-desc" id="modal-confirm-desc">Are you sure you want to remove this post from your saved library? This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="btn-cancel-delete" type="button">Cancel</button>
+        <button class="btn btn-danger" id="btn-confirm-delete" type="button">Delete Post</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accounts & Engine Integrations Manager Modal -->
+  <div class="modal-backdrop" id="accounts-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="accounts-modal-title">
+    <div class="modal-card modal-card-lg">
+      <div class="modal-header" style="justify-content: space-between; align-items: flex-start;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="modal-icon-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="8.5" cy="7" r="4"></circle>
+              <line x1="20" y1="8" x2="20" y2="14"></line>
+              <line x1="23" y1="11" x2="17" y2="11"></line>
+            </svg>
+          </div>
+          <div>
+            <h3 class="modal-title" id="accounts-modal-title">Accounts & Integrations Hub</h3>
+            <p class="modal-desc" style="margin: 0; font-size: 0.8rem;">Connect your social media profiles, configure your Gemini API Key to exit Demo Mode, and link publishing webhooks.</p>
+          </div>
+        </div>
+        <button class="modal-close-icon-btn" id="btn-close-accounts-modal" type="button" aria-label="Close modal">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="3" y1="3" x2="13" y2="13"></line>
+            <line x1="13" y1="3" x2="3" y2="13"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Segmented Navigation Tabs inside Modal -->
+      <div class="modal-tabs" role="tablist">
+        <button class="modal-tab-btn active" id="tab-btn-social" type="button" role="tab" aria-selected="true" aria-controls="tab-panel-social">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 14px; height: 14px;" aria-hidden="true">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+          <span>Social Accounts</span>
+          <span class="tab-badge" id="tab-badge-social-count">0/5</span>
+        </button>
+        <button class="modal-tab-btn" id="tab-btn-ai" type="button" role="tab" aria-selected="false" aria-controls="tab-panel-ai">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 14px; height: 14px;" aria-hidden="true">
+            <polygon points="8 1 10.2 5.5 15 6.2 11.5 9.6 12.3 14.5 8 12.2 3.7 14.5 4.5 9.6 1 6.2 5.8 5.5"></polygon>
+          </svg>
+          <span>AI Engine Key</span>
+          <span class="tab-badge-status live" id="tab-badge-ai-status">Live API</span>
+        </button>
+        <button class="modal-tab-btn" id="tab-btn-webhook" type="button" role="tab" aria-selected="false" aria-controls="tab-panel-webhook">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 14px; height: 14px;" aria-hidden="true">
+            <circle cx="8" cy="8" r="6"></circle>
+            <polyline points="8 5 8 8 10.5 9.5"></polyline>
+          </svg>
+          <span>Publishing Webhook</span>
+          <span class="tab-badge-status" id="tab-badge-webhook-status">Off</span>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="modal-body-scroll">
+        <!-- TAB PANEL 1: Social Accounts -->
+        <div class="modal-tab-panel active" id="tab-panel-social" role="tabpanel" aria-labelledby="tab-btn-social">
+          <!-- Selectable Creator Demo Presets -->
+          <div class="creator-presets-container">
+            <div class="creator-presets-header">
+              <div>
+                <span class="creator-presets-title">Selectable Creator Demo Presets (8 Fictional Profiles)</span>
+                <p class="creator-presets-subtitle">Click any creator to link their demo profile, or use Quick Link All.</p>
+              </div>
+              <button class="btn btn-primary btn-xs" id="btn-quick-connect-all" type="button" title="Link all 8 demo creators">Quick Link All</button>
+            </div>
+            <div class="creator-presets-grid" id="creator-presets-grid">
+              <!-- Populated by app.js with 8 fictional creators -->
+            </div>
+            <div class="demo-accounts-disclaimer">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="8" cy="8" r="7"></circle>
+                <line x1="8" y1="8" x2="8" y2="12"></line>
+                <circle cx="8" cy="5" r="0.75" fill="currentColor"></circle>
+              </svg>
+              <span>Demo mode: accounts are simulated and not connected to real social media APIs.</span>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <p style="font-size: 0.82rem; color: var(--muted); margin: 0;">Connected social platforms for automated multi-channel posting:</p>
+            <button class="btn btn-outline btn-xs" id="btn-add-account-trigger" type="button">+ Add Custom Account</button>
+          </div>
+          <div class="accounts-grid" id="accounts-cards-grid">
+            <!-- Cards populated dynamically via app.js -->
+          </div>
+        </div>
+
+        <!-- TAB PANEL 2: AI Engine Key -->
+        <div class="modal-tab-panel" id="tab-panel-ai" role="tabpanel" aria-labelledby="tab-btn-ai" style="display: none;">
+          <div class="api-key-config-box">
+            <!-- Dynamic Status Banner -->
+            <div class="status-banner banner-live" id="ai-key-status-banner">
+              <span class="status-banner-dot" id="ai-banner-dot"></span>
+              <div class="status-banner-content">
+                <span class="status-banner-title" id="ai-banner-title">Live AI Mode Active</span>
+                <span class="status-banner-sub" id="ai-banner-sub">Connected to Google Gemini API (gemini-2.0-flash). Real-time live generation enabled.</span>
+              </div>
+            </div>
+
+            <!-- Key Input -->
+            <div class="form-group" style="margin-top: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <label class="form-label" for="input-gemini-key" style="margin-bottom: 0;">
+                  <span>Google Gemini API Key</span>
+                </label>
+                <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" class="link-external-hint">Get free key from Google AI Studio &rarr;</a>
+              </div>
+              <div class="key-input-wrapper">
+                <input type="password" class="form-input key-input-field" id="input-gemini-key" value="AQ.Ab8RN6LPLzQuvJsd1n7BvV0TzToPNnhHPz73tShI4fljH2oyaA" placeholder="AIzaSy... (Paste your Google Gemini API Key)" autocomplete="off" />
+                <button type="button" class="btn-key-toggle-eye" id="btn-toggle-key-visibility" title="Show/Hide API Key" aria-label="Toggle API Key visibility">
+                  <svg id="eye-icon-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="2" r="3"/></svg>
+                  <svg id="eye-icon-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+              <span class="field-help" style="font-size: 0.75rem; color: var(--muted); margin-top: 4px; display: block;">Your key is stored securely in your browser's localStorage and is used exclusively for client-side API requests.</span>
+            </div>
+
+            <!-- Model Selection -->
+            <div class="form-group" style="margin-top: 14px;">
+              <label class="form-label" for="select-gemini-model">Select AI Model</label>
+              <select class="form-select" id="select-gemini-model">
+                <option value="gemini-2.0-flash" selected>gemini-2.0-flash (Recommended • Ultra fast & intelligent)</option>
+                <option value="gemini-1.5-pro">gemini-1.5-pro (Deep creative reasoning)</option>
+                <option value="gemini-1.5-flash">gemini-1.5-flash (High speed)</option>
+              </select>
+            </div>
+
+            <!-- Actions Bar -->
+            <div class="api-actions-bar">
+              <button class="btn btn-primary btn-sm" id="btn-save-gemini-key" type="button">
+                <span>Save & Activate Live Mode</span>
+              </button>
+              <button class="btn btn-outline btn-sm" id="btn-test-gemini-key" type="button">
+                <span>Test Connection</span>
+              </button>
+              <button class="btn btn-outline btn-sm btn-danger-hover" id="btn-clear-gemini-key" type="button" style="margin-left: auto;">
+                <span>Remove Key (Reset to Demo)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB PANEL 3: Webhook Dispatch -->
+        <div class="modal-tab-panel" id="tab-panel-webhook" role="tabpanel" aria-labelledby="tab-btn-webhook" style="display: none;">
+          <div class="api-key-config-box">
+            <!-- Status Banner -->
+            <div class="status-banner" id="webhook-status-banner">
+              <span class="status-banner-dot" id="webhook-banner-dot"></span>
+              <div class="status-banner-content">
+                <span class="status-banner-title" id="webhook-banner-title">Demo Mode Simulation</span>
+                <span class="status-banner-sub" id="webhook-banner-sub">Scheduler simulates 1-second dispatch. Provide your Zapier, Make, n8n, or custom webhook URL to trigger real dispatches.</span>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 16px;">
+              <label class="form-label" for="input-webhook-url">Publishing Webhook URL</label>
+              <input type="url" class="form-input" id="input-webhook-url" placeholder="https://hooks.zapier.com/hooks/catch/... or https://hook.eu1.make.com/..." />
+              <span class="field-help" style="font-size: 0.75rem; color: var(--muted); margin-top: 4px; display: block;">When you schedule posts in the Autonomous Scheduler, PostPilot will POST the JSON payload to this endpoint.</span>
+            </div>
+
+            <div class="api-actions-bar">
+              <button class="btn btn-primary btn-sm" id="btn-save-webhook" type="button">Save Webhook</button>
+              <button class="btn btn-outline btn-sm" id="btn-test-webhook" type="button">Send Test Ping</button>
+              <button class="btn btn-outline btn-sm btn-danger-hover" id="btn-clear-webhook" type="button" style="margin-left: auto;">Clear Endpoint</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Authorize Account Dialog Modal -->
+  <div class="modal-backdrop" id="authorize-account-modal" style="display: none; z-index: 10050;" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
+    <div class="modal-card" style="max-width: 460px;">
+      <div class="modal-header">
+        <div class="modal-icon-primary" id="auth-platform-icon-box">
+          <!-- Icon injected dynamically via JS -->
+        </div>
+        <div>
+          <h3 class="modal-title" id="auth-modal-title">Connect Account</h3>
+          <span style="font-size: 0.75rem; color: var(--muted);" id="auth-modal-subtitle">Authorize social integration</span>
+        </div>
+      </div>
+
+      <form id="auth-account-form" novalidate onsubmit="return false;" style="display: flex; flex-direction: column; gap: 14px;">
+        <!-- Platform Selection -->
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label" for="auth-select-platform">Target Social Network</label>
+          <select class="form-select" id="auth-select-platform">
+            <option value="instagram" selected>Instagram Professional / Creator</option>
+            <option value="linkedin">LinkedIn Profile / Company</option>
+            <option value="x">X (Twitter)</option>
+            <option value="facebook">Facebook Page</option>
+            <option value="youtube">YouTube Channel</option>
+          </select>
+        </div>
+
+        <!-- Username / ID -->
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label" for="auth-input-handle">
+            <span>Account ID / Username / Email <span class="required-star" aria-hidden="true">*</span></span>
+          </label>
+          <input type="text" class="form-input" id="auth-input-handle" placeholder="e.g. mainhoonharsh0 or email" required autocomplete="username" />
+          <span class="field-error" id="error-auth-handle" style="display: none;">Please enter your account ID / username.</span>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label" for="auth-input-password">
+            <span>Account Password <span class="required-star" aria-hidden="true">*</span></span>
+          </label>
+          <div class="key-input-wrapper">
+            <input type="password" class="form-input key-input-field" id="auth-input-password" placeholder="Enter account password" required autocomplete="current-password" />
+            <button type="button" class="btn-key-toggle-eye" id="btn-toggle-auth-password" title="Show/Hide Password" aria-label="Toggle password visibility">
+              <svg id="auth-eye-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="2" r="3"/></svg>
+              <svg id="auth-eye-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+          <span class="field-error" id="error-auth-password" style="display: none;">Please enter your password to authenticate.</span>
+        </div>
+
+        <div class="auth-permissions-card">
+          <span class="auth-perm-title">Secure OAuth & Publishing Session:</span>
+          <label class="auth-perm-item">
+            <input type="checkbox" checked disabled />
+            <span>Encrypted local session token for automated scheduling</span>
+          </label>
+          <label class="auth-perm-item">
+            <input type="checkbox" checked disabled />
+            <span>Auto-publish posts, captions, reels & hashtags</span>
+          </label>
+        </div>
+
+        <div class="modal-actions" style="margin-top: 6px;">
+          <button class="btn btn-outline" id="btn-cancel-auth-modal" type="button">Cancel</button>
+          <button class="btn btn-primary" id="btn-confirm-auth-account" type="button">
+            <span id="btn-auth-text">Login & Connect Account</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>

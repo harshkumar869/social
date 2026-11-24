@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PostPilot AI - Run Your Whole Social Media Empire From One Place. The bold autonomous AI social media manager built for modern creators.">
+  <title>PostPilot AI - Run Your Whole Social Media Empire From One Place</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Animated Mesh Background -->
+  <div class="animated-mesh-bg" aria-hidden="true">
+    <div class="mesh-sphere mesh-sphere-1"></div>
+    <div class="mesh-sphere mesh-sphere-2"></div>
+    <div class="mesh-sphere mesh-sphere-3"></div>
+  </div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Sticky Glass Navbar -->
+  <header class="navbar" id="top-navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo" aria-label="PostPilot AI Home">
+        <span class="logo-icon-wrapper">
+          <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 16L28 4L18 28L14 18L4 16Z" fill="url(#logo-grad)" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M14 18L28 4" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="20" cy="10" r="1.5" fill="#FFFFFF"/>
+            <defs>
+              <linearGradient id="logo-grad" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#EC4899"/>
+                <stop offset="0.5" stop-color="#A855F7"/>
+                <stop offset="1" stop-color="#38BDF8"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="logo-text">PostPilot<span class="logo-accent">.ai</span></span>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#creators" class="nav-link">Creators</a></li>
+          <li class="nav-item"><a href="#sample-dashboards" class="nav-link">Dashboards</a></li>
+          <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+          <li class="nav-item"><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle theme">
+          <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a href="app.html" class="btn btn-primary nav-cta">
+          <span>Launch App</span>
+          <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="8" x2="13" y2="8"></line>
+            <polyline points="9 4 13 8 9 12"></polyline>
+          </svg>
+        </a>
+        <button class="hamburger-btn" id="hamburger-btn" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open mobile navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section" id="hero">
+      <!-- Animated Creator Card Wall Background -->
+      <div class="hero-marquee-wall" aria-hidden="true">
+        <!-- Row 1: Scrolling Left -->
+        <div class="marquee-row marquee-left">
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#8B5CF6,#3B82F6)">RP</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Rohan Plays</span><svg class="verified-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg></div><span class="creator-handle">@rohan.plays</span></div><span class="creator-platform-pill yt">YouTube</span></div><div class="creator-card-body"><span class="creator-niche-tag">Gaming</span><span class="creator-followers">2.4M followers</span></div></div>
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#EC4899,#F97316)">TT</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Tanya Tech</span><svg class="verified-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg></div><span class="creator-handle">@tanya.techreview</span></div><span class="creator-platform-pill ig">Instagram</span></div><div class="creator-card-body"><span class="creator-niche-tag">Tech Reviews</span><span class="creator-followers">820K followers</span></div></div>
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#0EA5E9,#6366F1)">KK</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Kabir Kahaani</span><svg class="verified-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg></div><span class="creator-handle">@kabir.kahaani</span></div><span class="creator-platform-pill x">X</span></div><div class="creator-card-body"><span class="creator-niche-tag">Stand-up Comedy</span><span class="creator-followers">540K followers</span></div></div>
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#7C3AED,#D946EF)">VV</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Vikram Vlogs</span><svg class="verified-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg></div><span class="creator-handle">@vikramvlogs</span></div><span class="creator-platform-pill yt">YouTube</span></div><div class="creator-card-body"><span class="creator-niche-tag">Lifestyle Vlogs</span><span class="creator-followers">1.8M followers</span></div></div>
+          <!-- Clones for seamless loop -->
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#8B5CF6,#3B82F6)">RP</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Rohan Plays</span></div><span class="creator-handle">@rohan.plays</span></div><span class="creator-platform-pill yt">YouTube</span></div><div class="creator-card-body"><span class="creator-niche-tag">Gaming</span><span class="creator-followers">2.4M followers</span></div></div>
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#EC4899,#F97316)">TT</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Tanya Tech</span></div><span class="creator-handle">@tanya.techreview</span></div><span class="creator-platform-pill ig">Instagram</span></div><div class="creator-card-body"><span class="creator-niche-tag">Tech Reviews</span><span class="creator-followers">820K followers</span></div></div>
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#0EA5E9,#6366F1)">KK</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Kabir Kahaani</span></div><span class="creator-handle">@kabir.kahaani</span></div><span class="creator-platform-pill x">X</span></div><div class="creator-card-body"><span class="creator-niche-tag">Stand-up Comedy</span><span class="creator-followers">540K followers</span></div></div>
+        </div>
+        <!-- Row 2: Scrolling Right -->
+        <div class="marquee-row marquee-right">
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#F43F5E,#FB923C)">FF</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Fiza Fit</span><svg class="verified-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg></div><span class="creator-handle">@fiza.fit</span></div><span class="creator-platform-pill ig">Instagram</span></div><div class="creator-card-body"><span class="creator-niche-tag">Fitness</span><span class="creator-followers">960K followers</span></div></div>
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#06B6D4,#10B981)">AR</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Aarav Roasts</span><svg class="verified-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg></div><span class="creator-handle">@aarav.roasts</span></div><span class="creator-platform-pill ig">Instagram</span></div><div class="creator-card-body"><span class="creator-niche-tag">Comedy Skits</span><span class="creator-followers">1.2M followers</span></div></div>
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#10B981,#0D9488)">MM</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Meera Money</span><svg class="verified-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg></div><span class="creator-handle">@meeramoney</span></div><span class="creator-platform-pill li">LinkedIn</span></div><div class="creator-card-body"><span class="creator-niche-tag">Finance</span><span class="creator-followers">430K followers</span></div></div>
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#E11D48,#A855F7)">DR</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Dev Reels</span><svg class="verified-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg></div><span class="creator-handle">@dev.reels</span></div><span class="creator-platform-pill ig">Instagram</span></div><div class="creator-card-body"><span class="creator-niche-tag">Short Videos</span><span class="creator-followers">3.1M followers</span></div></div>
+          <!-- Clones -->
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#F43F5E,#FB923C)">FF</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Fiza Fit</span></div><span class="creator-handle">@fiza.fit</span></div><span class="creator-platform-pill ig">Instagram</span></div><div class="creator-card-body"><span class="creator-niche-tag">Fitness</span><span class="creator-followers">960K followers</span></div></div>
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#06B6D4,#10B981)">AR</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Aarav Roasts</span></div><span class="creator-handle">@aarav.roasts</span></div><span class="creator-platform-pill ig">Instagram</span></div><div class="creator-card-body"><span class="creator-niche-tag">Comedy Skits</span><span class="creator-followers">1.2M followers</span></div></div>
+          <div class="creator-marquee-card"><div class="creator-card-header"><div class="creator-avatar" style="background:linear-gradient(135deg,#10B981,#0D9488)">MM</div><div class="creator-meta"><div class="creator-name-row"><span class="creator-name">Meera Money</span></div><span class="creator-handle">@meeramoney</span></div><span class="creator-platform-pill li">LinkedIn</span></div><div class="creator-card-body"><span class="creator-niche-tag">Finance</span><span class="creator-followers">430K followers</span></div></div>
+        </div>
+      </div>
+
+      <!-- Vignette overlay -->
+      <div class="hero-vignette" aria-hidden="true"></div>
+
+      <!-- Hero Content -->
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><circle cx="6" cy="6" r="4"/></svg>
+          AI-Powered Social Media Automation
+        </div>
+        <h1 class="hero-title">Run Your Whole<br><span class="hero-title-gradient">Social Media Empire</span><br>From One Place</h1>
+        <p class="hero-subtitle">Generate platform-optimised captions, plan 7-day campaigns, schedule posts and track analytics across YouTube, Instagram, X and LinkedIn — powered by Gemini AI.</p>
+        <div class="hero-actions">
+          <a href="app.html" class="btn btn-primary btn-lg">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="18" height="18"><polygon points="5 3 19 10 5 17 5 3"></polygon></svg>
+            Launch App
+          </a>
+          <button type="button" class="btn btn-glass btn-lg" id="btn-watch-demo">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="18" height="18"><circle cx="10" cy="10" r="8"></circle><polygon points="8 7 14 10 8 13 8 7"></polygon></svg>
+            Watch Demo
+          </button>
+        </div>
+        <div class="hero-social-proof">
+          <div class="proof-avatars" aria-hidden="true">
+            <span style="background:linear-gradient(135deg,#8B5CF6,#3B82F6)">RP</span>
+            <span style="background:linear-gradient(135deg,#EC4899,#F97316)">TT</span>
+            <span style="background:linear-gradient(135deg,#F43F5E,#FB923C)">FF</span>
+            <span style="background:linear-gradient(135deg,#06B6D4,#10B981)">AR</span>
+          </div>
+          <span class="proof-text">Trusted by <strong>12,000+ creators</strong> worldwide</span>
+        </div>
+      </div>
+
+      <!-- Demo disclaimer -->
+      <p class="demo-disclaimer-floating" aria-label="Important disclaimer">Demo profiles. All creators shown are fictional and for demonstration only.</p>
+    </section>
+
+    <!-- ===== BUILT FOR CREATORS SECTION ===== -->
+    <section class="creators-section" id="creators">
+      <div class="section-container">
+        <div class="section-header" data-reveal>
+          <span class="section-eyebrow">Who It Is Built For</span>
+          <h2 class="section-title">Built for creators like<span class="accent-dot">.</span></h2>
+          <p class="section-subtitle">PostPilot AI understands every niche. Whatever you create, we make distribution effortless.</p>
+        </div>
+        <div class="creators-category-grid" data-reveal>
+          <div class="category-card" data-tilt>
+            <div class="category-icon-wrap" style="background:linear-gradient(135deg,rgba(139,92,246,0.25),rgba(59,130,246,0.15))">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
+            </div>
+            <h3 class="category-title">Gamers</h3>
+            <p class="category-desc">Stream clips, gaming tips and tournament announcements.</p>
+          </div>
+          <div class="category-card" data-tilt>
+            <div class="category-icon-wrap" style="background:linear-gradient(135deg,rgba(236,72,153,0.25),rgba(249,115,22,0.15))">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#EC4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            </div>
+            <h3 class="category-title">Comedians</h3>
+            <p class="category-desc">Roast reels, skits and viral comedy content across platforms.</p>
+          </div>
+          <div class="category-card" data-tilt>
+            <div class="category-icon-wrap" style="background:linear-gradient(135deg,rgba(14,165,233,0.25),rgba(99,102,241,0.15))">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <h3 class="category-title">Tech Reviewers</h3>
+            <p class="category-desc">Gadget unboxings, comparison threads and tech hot-takes.</p>
+          </div>
+          <div class="category-card" data-tilt>
+            <div class="category-icon-wrap" style="background:linear-gradient(135deg,rgba(124,58,237,0.25),rgba(217,70,239,0.15))">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.845v6.311a1 1 0 0 1-1.447.894L15 14M5 18h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z"/></svg>
+            </div>
+            <h3 class="category-title">Vloggers</h3>
+            <p class="category-desc">Lifestyle stories, travel diaries and day-in-the-life content.</p>
+          </div>
+          <div class="category-card" data-tilt>
+            <div class="category-icon-wrap" style="background:linear-gradient(135deg,rgba(244,63,94,0.25),rgba(251,146,60,0.15))">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F43F5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <h3 class="category-title">Fitness Creators</h3>
+            <p class="category-desc">Workout plans, nutrition tips and transformation journeys.</p>
+          </div>
+          <div class="category-card" data-tilt>
+            <div class="category-icon-wrap" style="background:linear-gradient(135deg,rgba(16,185,129,0.25),rgba(13,148,136,0.15))">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3 class="category-title">Finance Creators</h3>
+            <p class="category-desc">Market insights, investing tips and personal finance breakdowns.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SAMPLE CREATOR DASHBOARDS SECTION ===== -->
+    <section class="sample-dashboards-section" id="sample-dashboards">
+      <div class="section-container">
+        <div class="section-header" data-reveal>
+          <span class="section-eyebrow">See It In Action</span>
+          <h2 class="section-title">Sample creator dashboards<span class="accent-dot">.</span></h2>
+          <p class="section-subtitle">Real workflows. AI-powered. Here is how three creators manage their entire social presence inside PostPilot AI.</p>
+        </div>
+        <p class="demo-disclaimer-label" aria-live="polite">Demo profiles. All creators shown are fictional and for demonstration only.</p>
+
+        <!-- Dashboard Tab Switcher -->
+        <div class="dashboard-tabs" role="tablist" aria-label="Creator dashboard previews">
+          <button class="dash-tab active" role="tab" aria-selected="true" data-creator="rohan" aria-controls="dash-panel-rohan">Rohan Plays</button>
+          <button class="dash-tab" role="tab" aria-selected="false" data-creator="tanya" aria-controls="dash-panel-tanya">Tanya Tech</button>
+          <button class="dash-tab" role="tab" aria-selected="false" data-creator="fiza" aria-controls="dash-panel-fiza">Fiza Fit</button>
+        </div>
+
+        <!-- Dashboard Preview Frame -->
+        <div class="mock-dashboard-frame" id="mock-dashboard-frame">
+          <div class="mock-topbar">
+            <div class="mock-workspace-info">
+              <div class="mock-avatar" id="dash-avatar" style="background:linear-gradient(135deg,#8B5CF6,#3B82F6)">RP</div>
+              <div>
+                <div class="mock-creator-name" id="dash-creator-name">Rohan Plays</div>
+                <div class="mock-creator-handle" id="dash-creator-handle">@rohan.plays &bull; Gaming</div>
+              </div>
+            </div>
+            <div class="mock-status-pill">
+              <span class="mock-live-dot"></span>
+              <span id="dash-verified-text">Verified Creator</span>
+            </div>
+          </div>
+          <div class="mock-body">
+            <!-- Stats Row -->
+            <div class="mock-stats-row">
+              <div class="mock-stat-card">
+                <div class="mock-stat-label">Total Reach</div>
+                <div class="mock-stat-value" id="dash-reach">2.4M</div>
+                <div class="mock-stat-trend positive">+18.4%</div>
+              </div>
+              <div class="mock-stat-card">
+                <div class="mock-stat-label">Avg Engagement</div>
+                <div class="mock-stat-value" id="dash-engage">9.2%</div>
+                <div class="mock-stat-trend positive">+3.1%</div>
+              </div>
+              <div class="mock-stat-card">
+                <div class="mock-stat-label">Posts This Week</div>
+                <div class="mock-stat-value" id="dash-posts">14</div>
+                <div class="mock-stat-trend positive">On target</div>
+              </div>
+              <div class="mock-stat-card">
+                <div class="mock-stat-label">AI Saves / Week</div>
+                <div class="mock-stat-value" id="dash-saves">6.2h</div>
+                <div class="mock-stat-trend positive">Automated</div>
+              </div>
+            </div>
+            <!-- Chart + Queue -->
+            <div class="mock-content-row">
+              <div class="mock-chart-panel">
+                <div class="mock-chart-title">7-Day Reach Velocity</div>
+                <div class="mock-bars" id="dash-bars">
+                  <div class="mock-bar-col"><div class="mock-bar" style="height:55%"></div><span>Mon</span></div>
+                  <div class="mock-bar-col"><div class="mock-bar" style="height:72%"></div><span>Tue</span></div>
+                  <div class="mock-bar-col"><div class="mock-bar" style="height:48%"></div><span>Wed</span></div>
+                  <div class="mock-bar-col"><div class="mock-bar" style="height:88%"></div><span>Thu</span></div>
+                  <div class="mock-bar-col"><div class="mock-bar" style="height:65%"></div><span>Fri</span></div>
+                  <div class="mock-bar-col"><div class="mock-bar" style="height:94%"></div><span>Sat</span></div>
+                  <div class="mock-bar-col"><div class="mock-bar" style="height:78%"></div><span>Sun</span></div>
+                </div>
+              </div>
+              <div class="mock-queue-panel">
+                <div class="mock-chart-title">Upcoming Schedule</div>
+                <div class="mock-queue-list" id="dash-queue">
+                  <div class="mock-queue-item"><span class="mock-queue-time">Today 7 PM</span><span class="mock-queue-title">Top 10 FPS Moments</span><span class="mock-queue-badge scheduled">Scheduled</span></div>
+                  <div class="mock-queue-item"><span class="mock-queue-time">Tomorrow 10 AM</span><span class="mock-queue-title">New GPU Tier List</span><span class="mock-queue-badge draft">Draft</span></div>
+                  <div class="mock-queue-item"><span class="mock-queue-time">Thu 6 PM</span><span class="mock-queue-title">Live Tournament Recap</span><span class="mock-queue-badge scheduled">Scheduled</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- AI Draft -->
+            <div class="mock-ai-draft">
+              <div class="mock-ai-label">AI Caption Draft</div>
+              <div class="mock-ai-text" id="dash-caption">Level up your gaming setup. Here are the top 10 moments that broke the internet this week — featuring insane clutch plays, broken world records, and moments of pure skill you will not believe are real.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <section class="features-section" id="features">
+      <div class="section-container">
+        <div class="section-header" data-reveal>
+          <span class="section-eyebrow">Everything You Need</span>
+          <h2 class="section-title">The full creator toolkit<span class="accent-dot">.</span></h2>
+        </div>
+        <div class="features-grid" data-reveal>
+          <div class="feature-card">
+            <div class="feature-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <h3>AI Content Generator</h3>
+            <p>Generate platform-optimised captions, hashtags, CTAs and image prompts for Instagram, YouTube, X and LinkedIn in seconds.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <h3>7-Day Campaign Planner</h3>
+            <p>Get a full week of content ideas, formats and ready-to-publish drafts generated from just your business type and goal.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <h3>Autonomous Scheduler</h3>
+            <p>Schedule saved posts via Webhook API with live status badges — Scheduled, Sent, Failed — and an auto-dispatch queue.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+            <h3>Performance Analytics</h3>
+            <p>Cross-platform impressions, click-through rates, engagement and algorithm-optimised posting windows — all in one view.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
+            <h3>Saved Post Library</h3>
+            <p>Search, filter and manage your evergreen drafts, top-performing hooks and curated hashtag sets with one-click reuse.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>Secure API Integration</h3>
+            <p>Connect your Gemini API key with one click. All keys are stored locally in your browser — zero cloud storage of credentials.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="how-section" id="how-it-works">
+      <div class="section-container">
+        <div class="section-header" data-reveal>
+          <span class="section-eyebrow">Get Started Fast</span>
+          <h2 class="section-title">Three steps to automation<span class="accent-dot">.</span></h2>
+        </div>
+        <div class="how-steps" data-reveal>
+          <div class="how-step">
+            <div class="step-number">01</div>
+            <h3>Connect your platforms</h3>
+            <p>Link your Instagram, YouTube, X, LinkedIn and Facebook accounts or use the fictional demo creators to explore instantly.</p>
+          </div>
+          <div class="how-connector" aria-hidden="true"></div>
+          <div class="how-step">
+            <div class="step-number">02</div>
+            <h3>Generate and plan</h3>
+            <p>Type a topic or business goal and let Gemini AI produce captions, hashtags, image prompts and a full 7-day content calendar.</p>
+          </div>
+          <div class="how-connector" aria-hidden="true"></div>
+          <div class="how-step">
+            <div class="step-number">03</div>
+            <h3>Schedule and track</h3>
+            <p>Queue approved posts for auto-dispatch via Webhook, monitor live status badges and analyse performance from one dashboard.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PLATFORMS SECTION ===== -->
+    <section class="platforms-section" id="platforms">
+      <div class="section-container">
+        <div class="section-header" data-reveal>
+          <span class="section-eyebrow">Multi-Platform</span>
+          <h2 class="section-title">Every platform. One dashboard<span class="accent-dot">.</span></h2>
+        </div>
+        <div class="platforms-grid" data-reveal>
+          <div class="platform-pill yt-pill">YouTube</div>
+          <div class="platform-pill ig-pill">Instagram</div>
+          <div class="platform-pill x-pill">X (Twitter)</div>
+          <div class="platform-pill li-pill">LinkedIn</div>
+          <div class="platform-pill fb-pill">Facebook</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ SECTION ===== -->
+    <section class="faq-section" id="faq">
+      <div class="section-container">
+        <div class="section-header" data-reveal>
+          <span class="section-eyebrow">Answers</span>
+          <h2 class="section-title">Frequently asked questions<span class="accent-dot">.</span></h2>
+        </div>
+        <div class="faq-list" data-reveal>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" type="button">Is PostPilot AI free to use?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="faq-answer"><p>Yes — PostPilot AI is completely free. You bring your own Gemini API key (free tier available from Google AI Studio) and optionally a webhook URL for auto-posting. No subscription required.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" type="button">Do I need a Gemini API key?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="faq-answer"><p>No. Without an API key the app runs in Demo Mode — it generates realistic sample content instead of calling the live API. Add your own key inside the Accounts and AI panel to unlock live generation.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" type="button">Are the creator profiles shown real people?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="faq-answer"><p>No. All creator profiles in the demo — Rohan Plays, Tanya Tech, Fiza Fit and others — are entirely fictional and created for demonstration purposes only. They do not represent any real individual.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" type="button">Is my API key stored safely?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="faq-answer"><p>Your API key is stored only in your browser's localStorage — it never leaves your device or gets sent to any external server run by us. Clear localStorage or use the Clear Key button to remove it at any time.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" type="button">Which platforms are supported?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <div class="faq-answer"><p>PostPilot AI currently supports YouTube, Instagram, X (Twitter), LinkedIn and Facebook with platform-specific caption tone, character limits, hashtag density and posting-time recommendations.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FINAL CTA SECTION ===== -->
+    <section class="cta-section" id="cta">
+      <div class="section-container">
+        <div class="cta-card" data-reveal>
+          <div class="cta-glow" aria-hidden="true"></div>
+          <span class="section-eyebrow">Start Now — It Is Free</span>
+          <h2 class="cta-title">Your content empire starts here<span class="accent-dot">.</span></h2>
+          <p class="cta-sub">No sign-up. No credit card. Launch the app and start generating AI-powered content in under 60 seconds.</p>
+          <a href="app.html" class="btn btn-primary btn-lg">
+            Launch PostPilot AI
+            <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo-text">PostPilot<span class="logo-accent">.ai</span></span>
+        <p class="footer-tagline">The autonomous AI social media manager for the creator economy.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer Navigation">
+        <a href="#features" class="footer-link">Features</a>
+        <a href="#how-it-works" class="footer-link">How It Works</a>
+        <a href="#faq" class="footer-link">FAQ</a>
+        <a href="app.html" class="footer-link">Launch App</a>
+      </nav>
+      <p class="footer-legal">All creator profiles shown are fictional and for demonstration only. &copy; 2026 PostPilot AI.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
